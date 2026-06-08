@@ -3,8 +3,14 @@ package com.ifba.academia;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import com.ifba.academia.service.UsuarioService;
+import com.ifba.academia.service.PlanoAlunoService;
+import com.ifba.academia.service.FichaTreinoService;
+import com.ifba.academia.view.TelaLogin;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EnableJpaRepositories("com.ifba.academia.repository")
 public class SistemaAcademiaApplication {
 
     public static void main(String[] args) {
@@ -13,7 +19,9 @@ public class SistemaAcademiaApplication {
         
         ApplicationContext context = SpringApplication.run(SistemaAcademiaApplication.class, args);
         
-        com.ifba.academia.service.AlunoService alunoService = context.getBean(com.ifba.academia.service.AlunoService.class);
+        UsuarioService usuarioService = context.getBean(UsuarioService.class);
+        PlanoAlunoService planoAlunoService = context.getBean(PlanoAlunoService.class);
+        FichaTreinoService fichaTreinoService = context.getBean(FichaTreinoService.class);
         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -28,7 +36,9 @@ public class SistemaAcademiaApplication {
         
         //Abre o JFrame
         java.awt.EventQueue.invokeLater(() -> {
-            new com.ifba.academia.view.Dashboard(alunoService).setVisible(true);
+            
+            new TelaLogin(usuarioService, planoAlunoService, fichaTreinoService).setVisible(true);
+            
         });
     }
 }
