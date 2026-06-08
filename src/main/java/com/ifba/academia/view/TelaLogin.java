@@ -5,6 +5,7 @@
 package com.ifba.academia.view;
 
 import com.ifba.academia.model.Usuario;
+import com.ifba.academia.service.AlunoService;
 import com.ifba.academia.service.FichaTreinoService;
 import com.ifba.academia.service.PlanoAlunoService;
 import com.ifba.academia.service.UsuarioService;
@@ -18,11 +19,13 @@ public class TelaLogin extends javax.swing.JFrame {
     private UsuarioService usuarioService;
     private PlanoAlunoService planoAlunoService;
     private FichaTreinoService fichaTreinoService;
+    private AlunoService alunoService;
 
-    public TelaLogin(UsuarioService usuarioService, PlanoAlunoService planoAlunoService, FichaTreinoService fichaTreinoService) {
+    public TelaLogin(UsuarioService usuarioService, PlanoAlunoService planoAlunoService,FichaTreinoService fichaTreinoService, AlunoService alunoService) {
         this.usuarioService = usuarioService;
         this.planoAlunoService = planoAlunoService;
         this.fichaTreinoService = fichaTreinoService;
+        this.alunoService = alunoService;
         initComponents();
     }
 
@@ -161,7 +164,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
                 if (usuarioLogado.getPerfil().equals("ADMIN")) {
                     // Abre o Dashboard refatorado
-                    DashboardAdmin telaAdmin = new DashboardAdmin();
+                    DashboardAdmin telaAdmin = new DashboardAdmin(this.alunoService);
                     telaAdmin.setVisible(true);
                 } else {
                     DashboardAluno telaAluno = new DashboardAluno(usuarioLogado, planoAlunoService, fichaTreinoService); 

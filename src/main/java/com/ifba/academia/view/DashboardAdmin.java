@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.ifba.academia.view;
 
 /**
@@ -17,7 +13,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null); // Centraliza a tela
     }
-    
+   
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardAdmin.class.getName());
 
     /**

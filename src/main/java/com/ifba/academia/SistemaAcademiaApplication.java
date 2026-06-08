@@ -1,5 +1,6 @@
 package com.ifba.academia;
 
+import com.ifba.academia.service.AlunoService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +23,7 @@ public class SistemaAcademiaApplication {
         UsuarioService usuarioService = context.getBean(UsuarioService.class);
         PlanoAlunoService planoAlunoService = context.getBean(PlanoAlunoService.class);
         FichaTreinoService fichaTreinoService = context.getBean(FichaTreinoService.class);
+        AlunoService alunoService = context.getBean(AlunoService.class); // Busque aqui
         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -36,9 +38,7 @@ public class SistemaAcademiaApplication {
         
         //Abre o JFrame
         java.awt.EventQueue.invokeLater(() -> {
-            
-            new TelaLogin(usuarioService, planoAlunoService, fichaTreinoService).setVisible(true);
-            
+            new TelaLogin(usuarioService, planoAlunoService, fichaTreinoService, alunoService).setVisible(true);
         });
     }
 }
