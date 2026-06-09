@@ -23,7 +23,8 @@ public class SistemaAcademiaApplication {
         UsuarioService usuarioService = context.getBean(UsuarioService.class);
         PlanoAlunoService planoAlunoService = context.getBean(PlanoAlunoService.class);
         FichaTreinoService fichaTreinoService = context.getBean(FichaTreinoService.class);
-        AlunoService alunoService = context.getBean(AlunoService.class); // Busque aqui
+        AlunoService alunoService = context.getBean(AlunoService.class);
+        com.ifba.academia.service.PlanoService planoService = context.getBean(com.ifba.academia.service.PlanoService.class);
         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -38,7 +39,7 @@ public class SistemaAcademiaApplication {
         
         //Abre o JFrame
         java.awt.EventQueue.invokeLater(() -> {
-            new TelaLogin(usuarioService, planoAlunoService, fichaTreinoService, alunoService).setVisible(true);
+            new TelaLogin(usuarioService, planoAlunoService, fichaTreinoService, alunoService, planoService).setVisible(true);
         });
     }
 }

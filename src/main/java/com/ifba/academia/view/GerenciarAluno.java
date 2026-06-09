@@ -60,9 +60,10 @@ public class GerenciarAluno extends javax.swing.JFrame {
         lblPesquisar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(16, 30, 79));
 
         tblAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -60,8 +60,9 @@ public class DashboardAluno extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(16, 30, 79));
 
         lblBemVindo.setFont(new java.awt.Font("Inter Black", 0, 18)); // NOI18N
         lblBemVindo.setForeground(new java.awt.Color(255, 255, 255));
@@ -77,7 +78,6 @@ public class DashboardAluno extends javax.swing.JFrame {
         lblVencimento.setForeground(new java.awt.Color(255, 255, 255));
         lblVencimento.setText("Vencimento:");
 
-        tblFichaTreino.setBackground(new java.awt.Color(51, 51, 51));
         tblFichaTreino.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

@@ -20,12 +20,14 @@ public class TelaLogin extends javax.swing.JFrame {
     private PlanoAlunoService planoAlunoService;
     private FichaTreinoService fichaTreinoService;
     private AlunoService alunoService;
+    private com.ifba.academia.service.PlanoService planoService;
 
-    public TelaLogin(UsuarioService usuarioService, PlanoAlunoService planoAlunoService,FichaTreinoService fichaTreinoService, AlunoService alunoService) {
+    public TelaLogin(UsuarioService usuarioService, PlanoAlunoService planoAlunoService, FichaTreinoService fichaTreinoService, AlunoService alunoService, com.ifba.academia.service.PlanoService planoService) {
         this.usuarioService = usuarioService;
         this.planoAlunoService = planoAlunoService;
         this.fichaTreinoService = fichaTreinoService;
         this.alunoService = alunoService;
+        this.planoService = planoService;
         initComponents();
     }
 
@@ -62,8 +64,9 @@ public class TelaLogin extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(16, 30, 79));
 
         lblTitulo.setFont(new java.awt.Font("Inter Black", 0, 24)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -164,7 +167,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
                 if (usuarioLogado.getPerfil().equals("ADMIN")) {
                     // Abre o Dashboard refatorado
-                    DashboardAdmin telaAdmin = new DashboardAdmin(this.alunoService);
+                    DashboardAdmin telaAdmin = new DashboardAdmin(this.alunoService, this.planoService, this.planoAlunoService);
                     telaAdmin.setVisible(true);
                 } else {
                     DashboardAluno telaAluno = new DashboardAluno(usuarioLogado, planoAlunoService, fichaTreinoService); 
