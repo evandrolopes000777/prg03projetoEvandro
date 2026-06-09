@@ -10,6 +10,7 @@ import lombok.*;
  */
 @Entity
 @Table(name = "planos")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
