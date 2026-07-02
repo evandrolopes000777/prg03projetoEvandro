@@ -4,8 +4,8 @@
  */
 package com.ifba.academia.view;
 
-import com.ifba.academia.model.Aluno;
-import com.ifba.academia.service.AlunoService;
+import com.ifba.academia.model.Administrador;
+import com.ifba.academia.service.AdministradorService;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -13,22 +13,15 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import java.time.format.DateTimeFormatter;
 
-/**
- *
- * @author evandro
- */
-public class GerenciarExercicio extends javax.swing.JFrame {
+public class GerenciarAdministrador extends javax.swing.JFrame {
     
-    private com.ifba.academia.service.ExercicioService exercicioService;
-    private com.ifba.academia.service.FichaTreinoService fichaTreinoService;
+    private AdministradorService administradorService;
     private DefaultTableModel modeloTabela;
     private TableRowSorter<DefaultTableModel> sorter;
     
-   public GerenciarExercicio(com.ifba.academia.service.ExercicioService exercicioService, com.ifba.academia.service.FichaTreinoService fichaTreinoService) {
-        this.exercicioService = exercicioService;
-        this.fichaTreinoService = fichaTreinoService;
+    public GerenciarAdministrador(AdministradorService administradorService) {
+        this.administradorService = administradorService;
         initComponents();
         this.setLocationRelativeTo(null);
         inicializarTabela();
@@ -36,12 +29,12 @@ public class GerenciarExercicio extends javax.swing.JFrame {
         configurarFiltroDinamico();
     }
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GerenciarExercicio.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(GerenciarAdministrador.class.getName());
 
     /**
      * Creates new form GerenciarAluno
      */
-    public GerenciarExercicio() {
+    public GerenciarAdministrador() {
         initComponents();
     }
 
@@ -56,40 +49,48 @@ public class GerenciarExercicio extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblExercicios = new javax.swing.JTable();
+        tblAlunos = new javax.swing.JTable();
         txtPesquisa = new javax.swing.JTextField();
         lblPesquisar = new javax.swing.JLabel();
-        lblTitulo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(16, 30, 79));
 
-        tblExercicios.setModel(new javax.swing.table.DefaultTableModel(
+        tblAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nome", "Login", "Editar", "Excluir"
             }
-        ));
-        tblExercicios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblExerciciosMouseClicked(evt);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblExercicios);
+        tblAlunos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAlunosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblAlunos);
 
         lblPesquisar.setForeground(new java.awt.Color(255, 255, 255));
         lblPesquisar.setText("Pesquisar");
 
-        lblTitulo.setFont(new java.awt.Font("Inter Black", 0, 18)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("EXERCICIOS");
+        jLabel1.setFont(new java.awt.Font("Inter Black", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("ADMINISTRADORES");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,10 +101,10 @@ public class GerenciarExercicio extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblPesquisar)
-                        .addGap(406, 406, 406)
-                        .addComponent(lblTitulo))
+                        .addGap(368, 368, 368)
+                        .addComponent(jLabel1))
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(438, Short.MAX_VALUE))
+                .addContainerGap(406, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 972, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,7 +116,7 @@ public class GerenciarExercicio extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPesquisar)
-                    .addComponent(lblTitulo))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -137,44 +138,55 @@ public class GerenciarExercicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblExerciciosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblExerciciosMouseClicked
+    private void tblAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlunosMouseClicked
         
-      int linhaView = tblExercicios.getSelectedRow();
+        int linhaView = tblAlunos.getSelectedRow();
         if (linhaView == -1) return;
 
-        int linhaModel = tblExercicios.convertRowIndexToModel(linhaView);
-        int coluna = tblExercicios.columnAtPoint(evt.getPoint());
+        // Converte o índice da linha visual filtrada para o índice real do modelo de dados
+        int linhaModel = tblAlunos.convertRowIndexToModel(linhaView);
+        int coluna = tblAlunos.columnAtPoint(evt.getPoint());
 
         Long id = (Long) modeloTabela.getValueAt(linhaModel, 0);
 
-        if (coluna == 5) {
-            exercicioService.buscarPorId(id).ifPresentOrElse(exercicio -> {
-                CadastroExercicio telaCadastro = new CadastroExercicio(exercicioService, fichaTreinoService);
-                telaCadastro.preencherCamposParaEdicao(exercicio);
-                telaCadastro.setVisible(true);
+        if (coluna == 3) { // Coluna "Editar"
+            try {
+                java.util.Optional<com.ifba.academia.model.Administrador> adminOpt = administradorService.buscarPorId(id);
                 
-                telaCadastro.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosed(java.awt.event.WindowEvent windowEvent) {
-                        preencherTabela();
-                    }
-                });
-            }, () -> JOptionPane.showMessageDialog(this, "Exercício não encontrado."));
+                if (adminOpt.isPresent()) {
+                    com.ifba.academia.model.Administrador admin = adminOpt.get();
+                    
+                    CadastroAdministrador telaCadastro = new CadastroAdministrador(administradorService);
+                    telaCadastro.preencherCamposParaEdicao(admin);
+                    telaCadastro.setVisible(true);
+                    
+                    // Recarrega a tabela automaticamente quando o usuário terminar de editar e fechar a tela
+                    telaCadastro.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosed(java.awt.event.WindowEvent windowEvent) {
+                            preencherTabela();
+                        }
+                    });
+                } else {
+                    JOptionPane.showMessageDialog(this, "Administrador não encontrado.");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Erro ao abrir edição: " + e.getMessage());
+            }
             
-        } else if (coluna == 6) {
-            int resposta = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir este exercício?", "Confirmação", JOptionPane.YES_NO_OPTION);
+        } else if (coluna == 4) { // Coluna "Excluir"
+            int resposta = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir este administrador?", "Confirmação", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 try {
-                    exercicioService.deletar(id);
-                    JOptionPane.showMessageDialog(this, "Exercício excluído com sucesso!");
+                    administradorService.excluir(id);
+                    JOptionPane.showMessageDialog(this, "Administrador excluído com sucesso!");
                     preencherTabela();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Erro ao excluir: " + e.getMessage());
                 }
             }
-        }
-        
-    }//GEN-LAST:event_tblExerciciosMouseClicked
+        }        
+    }//GEN-LAST:event_tblAlunosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -198,50 +210,53 @@ public class GerenciarExercicio extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new GerenciarExercicio().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new GerenciarAdministrador().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblPesquisar;
-    private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTable tblExercicios;
+    private javax.swing.JTable tblAlunos;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 
     private void inicializarTabela() {
         modeloTabela = new DefaultTableModel(
             new Object[][] {},
-            new String[] {"ID", "Nome", "Séries", "Repetições", "Carga (kg)", "Editar", "Excluir"}
+            new String[] {"ID", "Nome", "Login", "Editar", "Excluir"}
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; 
             }
         };
-        tblExercicios.setModel(modeloTabela);
+        tblAlunos.setModel(modeloTabela);
         sorter = new TableRowSorter<>(modeloTabela);
-        tblExercicios.setRowSorter(sorter);
+        tblAlunos.setRowSorter(sorter);
     }
 
     public void preencherTabela() {
         modeloTabela.setRowCount(0);
+        
         try {
-            List<com.ifba.academia.model.Exercicio> lista = exercicioService.listarTodos();
-            for (com.ifba.academia.model.Exercicio e : lista) {
-                modeloTabela.addRow(new Object[]{
-                    e.getId(),
-                    e.getNome(),
-                    e.getSeries(),
-                    e.getRepeticoes(),
-                    e.getCarga(),
-                    "✏️ Editar",
-                    "❌ Excluir"
-                });
+            List<Administrador> lista = administradorService.listarTodos();
+            
+            for (int i = 0; i < lista.size(); i++) {
+                Administrador admin = lista.get(i);
+                
+                Object[] linha = new Object[5];
+                linha[0] = admin.getId();
+                linha[1] = admin.getNome();
+                linha[2] = admin.getLogin();
+                linha[3] = "✏ Editar";
+                linha[4] = "✖ Excluir";
+                
+                modeloTabela.addRow(linha);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao listar exercícios: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao listar administradores: " + e.getMessage());
         }
     }
 

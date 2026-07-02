@@ -16,24 +16,22 @@ import com.ifba.academia.service.UsuarioService;
  */
 public class TelaLogin extends javax.swing.JFrame {
     
-    private UsuarioService usuarioService;
+   private UsuarioService usuarioService;
     private PlanoAlunoService planoAlunoService;
     private FichaTreinoService fichaTreinoService;
     private AlunoService alunoService;
     private com.ifba.academia.service.PlanoService planoService;
+    private com.ifba.academia.service.AdministradorService administradorService;
 
-    public TelaLogin(UsuarioService usuarioService, PlanoAlunoService planoAlunoService, FichaTreinoService fichaTreinoService, AlunoService alunoService, com.ifba.academia.service.PlanoService planoService) {
+    public TelaLogin(UsuarioService usuarioService, PlanoAlunoService planoAlunoService, FichaTreinoService fichaTreinoService, AlunoService alunoService, com.ifba.academia.service.PlanoService planoService, com.ifba.academia.service.AdministradorService administradorService) {
         this.usuarioService = usuarioService;
         this.planoAlunoService = planoAlunoService;
         this.fichaTreinoService = fichaTreinoService;
         this.alunoService = alunoService;
         this.planoService = planoService;
+        this.administradorService = administradorService;
         initComponents();
-    }
-
-    public TelaLogin(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
-        initComponents();
+        setLocationRelativeTo(null);
     }
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
@@ -167,7 +165,8 @@ public class TelaLogin extends javax.swing.JFrame {
 
                 if (usuarioLogado.getPerfil().equals("ADMIN")) {
                     // Abre o Dashboard refatorado
-                    DashboardAdmin telaAdmin = new DashboardAdmin(this.alunoService, this.planoService, this.planoAlunoService);
+                    // Abre o Dashboard refatorado
+                    DashboardAdmin telaAdmin = new DashboardAdmin(this.alunoService, this.planoService, this.planoAlunoService, this.administradorService);
                     telaAdmin.setVisible(true);
                 } else {
                     DashboardAluno telaAluno = new DashboardAluno(usuarioLogado, planoAlunoService, fichaTreinoService); 

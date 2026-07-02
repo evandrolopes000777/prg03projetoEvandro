@@ -25,6 +25,7 @@ public class SistemaAcademiaApplication {
         FichaTreinoService fichaTreinoService = context.getBean(FichaTreinoService.class);
         AlunoService alunoService = context.getBean(AlunoService.class);
         com.ifba.academia.service.PlanoService planoService = context.getBean(com.ifba.academia.service.PlanoService.class);
+        com.ifba.academia.service.AdministradorService administradorService = context.getBean(com.ifba.academia.service.AdministradorService.class);
         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -37,9 +38,9 @@ public class SistemaAcademiaApplication {
             System.err.println("Erro ao aplicar o tema visual.");
         }
         
-        //Abre o JFrame
+        //abre o jframe
         java.awt.EventQueue.invokeLater(() -> {
-            new TelaLogin(usuarioService, planoAlunoService, fichaTreinoService, alunoService, planoService).setVisible(true);
+            new TelaLogin(usuarioService, planoAlunoService, fichaTreinoService, alunoService, planoService, administradorService).setVisible(true);
         });
     }
 }
