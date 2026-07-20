@@ -7,6 +7,7 @@ import br.com.ifba.academia.plano.controller.PlanoIController;
 import br.com.ifba.academia.planoaluno.controller.PlanoAlunoIController;
 import br.com.ifba.academia.fichatreino.controller.FichaTreinoIController;
 import br.com.ifba.academia.exercicio.controller.ExercicioIController;
+import br.com.ifba.academia.pagamento.controller.PagamentoIController;
 
 import br.com.ifba.academia.usuario.entity.Usuario;
 import br.com.ifba.academia.pessoa.entity.Pessoa;
@@ -30,8 +31,9 @@ public class AcademiaApplication {
         PlanoAlunoIController planoAlunoController = context.getBean(PlanoAlunoIController.class);
         FichaTreinoIController fichaTreinoController = context.getBean(FichaTreinoIController.class);
         ExercicioIController exercicioController = context.getBean(ExercicioIController.class);
+        PagamentoIController pagamentoController = context.getBean(PagamentoIController.class);
 
-        //verificar se o banco esta vazio, se sim, criar um admin padrao
+        // verificar se o banco esta vazio, se sim, criar um admin padrao
         if (usuarioController.findAll().isEmpty()) {
             
             Pessoa adminPessoa = new Pessoa();
@@ -61,7 +63,8 @@ public class AcademiaApplication {
                 planoController,
                 planoAlunoController,
                 fichaTreinoController,
-                exercicioController
+                exercicioController,
+                pagamentoController
             );
             telaLogin.setVisible(true);
         });

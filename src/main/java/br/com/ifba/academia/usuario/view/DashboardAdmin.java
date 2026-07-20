@@ -7,6 +7,7 @@ import br.com.ifba.academia.pessoa.controller.PessoaIController;
 import br.com.ifba.academia.plano.controller.PlanoIController;
 import br.com.ifba.academia.planoaluno.controller.PlanoAlunoIController;
 import br.com.ifba.academia.usuario.controller.UsuarioIController;
+import br.com.ifba.academia.pagamento.controller.PagamentoIController;
 
 public class DashboardAdmin extends javax.swing.JFrame {
     
@@ -16,16 +17,18 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private PlanoAlunoIController planoAlunoService;
     private FichaTreinoIController fichaTreinoService;
     private ExercicioIController exercicioService;
+    private PagamentoIController pagamentoService;
     
-    public DashboardAdmin(UsuarioIController usuarioService, PessoaIController pessoaService, PlanoIController planoService, PlanoAlunoIController planoAlunoService, FichaTreinoIController fichaTreinoService, ExercicioIController exercicioService) {
+    public DashboardAdmin(UsuarioIController usuarioService, PessoaIController pessoaService, PlanoIController planoService, PlanoAlunoIController planoAlunoService, FichaTreinoIController fichaTreinoService, ExercicioIController exercicioService, PagamentoIController pagamentoService) {
         this.usuarioService = usuarioService;
         this.pessoaService = pessoaService;
         this.planoService = planoService;
         this.planoAlunoService = planoAlunoService;
         this.fichaTreinoService = fichaTreinoService;
         this.exercicioService = exercicioService;
+        this.pagamentoService = pagamentoService;
         initComponents();
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
     }
    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(DashboardAdmin.class.getName());

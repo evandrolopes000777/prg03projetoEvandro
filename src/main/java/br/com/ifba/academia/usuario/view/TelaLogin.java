@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package br.com.ifba.academia.usuario.view;
 
 import br.com.ifba.academia.exercicio.controller.ExercicioIController;
@@ -11,6 +7,7 @@ import br.com.ifba.academia.pessoa.controller.PessoaIController;
 import br.com.ifba.academia.plano.controller.PlanoIController;
 import br.com.ifba.academia.planoaluno.controller.PlanoAlunoIController;
 import br.com.ifba.academia.usuario.controller.UsuarioIController;
+import br.com.ifba.academia.pagamento.controller.PagamentoIController;
 
 public class TelaLogin extends javax.swing.JFrame {
     
@@ -20,14 +17,16 @@ public class TelaLogin extends javax.swing.JFrame {
     private PlanoAlunoIController planoAlunoService;
     private FichaTreinoIController fichaTreinoService;
     private ExercicioIController exercicioService;
+    private PagamentoIController pagamentoService;
 
-    public TelaLogin(UsuarioIController usuarioService, PessoaIController pessoaService, PlanoIController planoService, PlanoAlunoIController planoAlunoService, FichaTreinoIController fichaTreinoService, ExercicioIController exercicioService) {
+    public TelaLogin(UsuarioIController usuarioService, PessoaIController pessoaService, PlanoIController planoService, PlanoAlunoIController planoAlunoService, FichaTreinoIController fichaTreinoService, ExercicioIController exercicioService, PagamentoIController pagamentoService) {
         this.usuarioService = usuarioService;
         this.pessoaService = pessoaService;
         this.planoService = planoService;
         this.planoAlunoService = planoAlunoService;
         this.fichaTreinoService = fichaTreinoService;
         this.exercicioService = exercicioService;
+        this.pagamentoService = pagamentoService;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -160,7 +159,7 @@ public class TelaLogin extends javax.swing.JFrame {
 
              if (usuarioLogado != null) {
                  if (usuarioLogado.getPerfil().equals("ADMIN")) {
-                     DashboardAdmin telaAdmin = new DashboardAdmin(usuarioService, pessoaService, planoService, planoAlunoService, fichaTreinoService, exercicioService);
+                     DashboardAdmin telaAdmin = new DashboardAdmin(usuarioService, pessoaService, planoService, planoAlunoService, fichaTreinoService, exercicioService, pagamentoService);
                      telaAdmin.setVisible(true);
                  } else {
                      DashboardAluno telaAluno = new DashboardAluno(usuarioLogado, planoAlunoService, fichaTreinoService); 
