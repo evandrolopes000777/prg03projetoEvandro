@@ -2,7 +2,6 @@ package br.com.ifba.academia.exercicio.view;
 
 import br.com.ifba.academia.exercicio.controller.ExercicioIController;
 import br.com.ifba.academia.exercicio.entity.Exercicio;
-import br.com.ifba.academia.fichatreino.controller.FichaTreinoIController;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
@@ -14,13 +13,11 @@ import javax.swing.table.TableRowSorter;
 public class GerenciarExercicio extends javax.swing.JFrame {
     
     private ExercicioIController exercicioService;
-    private FichaTreinoIController fichaTreinoService;
     private DefaultTableModel modeloTabela;
     private TableRowSorter<DefaultTableModel> sorter;
     
-   public GerenciarExercicio(ExercicioIController exercicioService, FichaTreinoIController fichaTreinoService) {
+   public GerenciarExercicio(ExercicioIController exercicioService) {
         this.exercicioService = exercicioService;
-        this.fichaTreinoService = fichaTreinoService;
         initComponents();
         this.setLocationRelativeTo(null);
         inicializarTabela();
@@ -138,10 +135,10 @@ public class GerenciarExercicio extends javax.swing.JFrame {
         int coluna = tblExercicios.columnAtPoint(evt.getPoint());
         Long id = (Long) modeloTabela.getValueAt(linhaModel, 0);
 
-        if (coluna == 5) {
+        if (coluna == 3) {
             try {
                 Exercicio exercicio = exercicioService.findById(id);
-                CadastroExercicio telaCadastro = new CadastroExercicio(exercicioService, fichaTreinoService);
+                CadastroExercicio telaCadastro = new CadastroExercicio(exercicioService); 
                 telaCadastro.preencherCamposParaEdicao(exercicio);
                 telaCadastro.setVisible(true);
                 
@@ -154,7 +151,7 @@ public class GerenciarExercicio extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Exercício não encontrado.");
             }
-        } else if (coluna == 6) {
+        } else if (coluna == 4) {
             int resposta = JOptionPane.showConfirmDialog(this, "Deseja excluir este exercício?", "Confirmação", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 try {
@@ -166,7 +163,6 @@ public class GerenciarExercicio extends javax.swing.JFrame {
                 }
             }
         }
-        
     }//GEN-LAST:event_tblExerciciosMouseClicked
 
     /**
@@ -206,7 +202,7 @@ public class GerenciarExercicio extends javax.swing.JFrame {
     private void inicializarTabela() {
         modeloTabela = new DefaultTableModel(
             new Object[][] {},
-            new String[] {"ID", "Nome", "Séries", "Repetições", "Carga (kg)", "Editar", "Excluir"}
+            new String[] {"ID", "Nome", "Grupo Muscular", "Editar", "Excluir"}
         ) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -224,7 +220,7 @@ public class GerenciarExercicio extends javax.swing.JFrame {
             List<Exercicio> lista = exercicioService.findAll();
             for (Exercicio e : lista) {
                 modeloTabela.addRow(new Object[]{
-                    e.getId(), e.getNome(), e.getSeries(), e.getRepeticoes(), e.getCarga(),
+                    e.getId(), e.getNome(), e.getGrupoMuscular(),
                     "✏️ Editar", "❌ Excluir"
                 });
             }
@@ -247,7 +243,6 @@ public class GerenciarExercicio extends javax.swing.JFrame {
                 if (texto.trim().length() == 0) {
                     sorter.setRowFilter(null);
                 } else {
-                    // Filtra ignorando maiúsculas/minúsculas
                     sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto, 1));
                 }
             }

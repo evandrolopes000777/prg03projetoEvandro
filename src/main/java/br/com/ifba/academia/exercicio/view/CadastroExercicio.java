@@ -2,18 +2,15 @@ package br.com.ifba.academia.exercicio.view;
 
 import br.com.ifba.academia.exercicio.controller.ExercicioIController;
 import br.com.ifba.academia.exercicio.entity.Exercicio;
-import br.com.ifba.academia.fichatreino.controller.FichaTreinoIController;
-import br.com.ifba.academia.fichatreino.entity.FichaTreino;
+
 
 public class CadastroExercicio extends javax.swing.JFrame {
     
    private ExercicioIController exercicioService;
-   private FichaTreinoIController fichaTreinoService;
    private Exercicio exercicioEmEdicao = null;
    
-   public CadastroExercicio(ExercicioIController exercicioService, FichaTreinoIController fichaTreinoService) {
+   public CadastroExercicio(ExercicioIController exercicioService) {
         this.exercicioService = exercicioService;
-        this.fichaTreinoService = fichaTreinoService;
         initComponents();
     }
     
@@ -41,14 +38,10 @@ public class CadastroExercicio extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
-        lblSeries = new javax.swing.JLabel();
-        lblRepeticoes = new javax.swing.JLabel();
+        lblGrupoMuscular = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        txtRepeticoes = new javax.swing.JTextField();
-        txtSeries = new javax.swing.JTextField();
-        lblCarga = new javax.swing.JLabel();
+        txtGrupoMuscular = new javax.swing.JTextField();
         lblInformacoesDoExercicio = new javax.swing.JLabel();
-        txtCarga = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -75,24 +68,14 @@ public class CadastroExercicio extends javax.swing.JFrame {
         lblNome.setForeground(new java.awt.Color(255, 255, 255));
         lblNome.setText("Nome: ");
 
-        lblSeries.setForeground(new java.awt.Color(255, 255, 255));
-        lblSeries.setText("Series:");
-
-        lblRepeticoes.setForeground(new java.awt.Color(255, 255, 255));
-        lblRepeticoes.setText("Repetições:");
+        lblGrupoMuscular.setForeground(new java.awt.Color(255, 255, 255));
+        lblGrupoMuscular.setText("Grupo Muscular");
 
         txtNome.addActionListener(this::txtNomeActionPerformed);
-
-        txtRepeticoes.addActionListener(this::txtRepeticoesActionPerformed);
-
-        lblCarga.setForeground(new java.awt.Color(255, 255, 255));
-        lblCarga.setText("Carga (KG)");
 
         lblInformacoesDoExercicio.setFont(new java.awt.Font("Inter Black", 0, 13)); // NOI18N
         lblInformacoesDoExercicio.setForeground(new java.awt.Color(255, 255, 255));
         lblInformacoesDoExercicio.setText("INFORMAÇÕES DO EXERCICIO");
-
-        txtCarga.addActionListener(this::txtCargaActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -111,22 +94,10 @@ public class CadastroExercicio extends javax.swing.JFrame {
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblSeries))
+                        .addComponent(lblGrupoMuscular))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txtSeries, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblRepeticoes))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtRepeticoes, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblCarga))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtGrupoMuscular, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -139,18 +110,10 @@ public class CadastroExercicio extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblSeries)
+                .addComponent(lblGrupoMuscular)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSeries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRepeticoes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtRepeticoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblCarga, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
+                .addComponent(txtGrupoMuscular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -175,14 +138,10 @@ public class CadastroExercicio extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(lblTitulo)
                 .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(110, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37))))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,34 +162,22 @@ public class CadastroExercicio extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
-    private void txtRepeticoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRepeticoesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRepeticoesActionPerformed
-
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
         
-       String nomeDigitado = txtNome.getText().trim();
-        String seriesDigitado = txtSeries.getText().trim();
-        String repeticoesDigitado = txtRepeticoes.getText().trim();
-        String cargaDigitada = txtCarga.getText().trim();
+        String nomeDigitado = txtNome.getText().trim();
+        String grupoMuscularDigitado = txtGrupoMuscular.getText().trim();
         
-        //Valida se os campos não estão vazios
-        if (nomeDigitado.isEmpty() || seriesDigitado.isEmpty() || repeticoesDigitado.isEmpty() || cargaDigitada.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos antes de salvar!", "Campos Obrigatórios", javax.swing.JOptionPane.WARNING_MESSAGE);
+        if (nomeDigitado.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, preencha o nome do exercício!", "Campos Obrigatórios", javax.swing.JOptionPane.WARNING_MESSAGE);
             return; 
         }
         
         try {
             Exercicio exercicio = (this.exercicioEmEdicao != null) ? this.exercicioEmEdicao : new Exercicio();
             
-            exercicio.setNome(txtNome.getText().trim());
-            exercicio.setSeries(Integer.parseInt(txtSeries.getText().trim()));
-            exercicio.setRepeticoes(Integer.parseInt(txtRepeticoes.getText().trim()));
-            exercicio.setCarga(Double.parseDouble(txtCarga.getText().trim()));
-
-            FichaTreino ficha = fichaTreinoService.findById(1L); 
-            exercicio.setFichaTreino(ficha);
+            exercicio.setNome(nomeDigitado);
+            exercicio.setGrupoMuscular(grupoMuscularDigitado);
 
             if(exercicio.getId() == null) this.exercicioService.save(exercicio);
             else this.exercicioService.update(exercicio);
@@ -242,10 +189,6 @@ public class CadastroExercicio extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Erro ao salvar: " + e.getMessage());
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void txtCargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCargaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCargaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,24 +219,18 @@ public class CadastroExercicio extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblCarga;
+    private javax.swing.JLabel lblGrupoMuscular;
     private javax.swing.JLabel lblInformacoesDoExercicio;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblRepeticoes;
-    private javax.swing.JLabel lblSeries;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JTextField txtCarga;
+    private javax.swing.JTextField txtGrupoMuscular;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtRepeticoes;
-    private javax.swing.JTextField txtSeries;
     // End of variables declaration//GEN-END:variables
     
     public void preencherCamposParaEdicao(Exercicio exercicio) {
         this.exercicioEmEdicao = exercicio;
         txtNome.setText(exercicio.getNome());
-        txtSeries.setText(String.valueOf(exercicio.getSeries()));
-        txtRepeticoes.setText(String.valueOf(exercicio.getRepeticoes()));
-        txtCarga.setText(String.valueOf(exercicio.getCarga()));
+        txtGrupoMuscular.setText(exercicio.getGrupoMuscular());
         btnSalvar.setText("Salvar Alterações");
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
