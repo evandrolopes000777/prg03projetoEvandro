@@ -13,8 +13,17 @@ public class PlanoAlunoController implements PlanoAlunoIController {
     private PlanoAlunoIService planoAlunoService;
 
     @Override
-    public PlanoAluno save(PlanoAluno planoAluno) { return planoAlunoService.save(planoAluno); }
+    public PlanoAluno findById(Long id) { return planoAlunoService.findById(id); }
 
     @Override
     public List<PlanoAluno> findAll() { return planoAlunoService.findAll(); }
+
+    @Override
+    public void delete(Long id) { planoAlunoService.delete(id); }
+
+    @Override
+    public PlanoAluno save(PlanoAluno planoAluno) { return planoAlunoService.save(planoAluno); }
+
+    @Override
+    public PlanoAluno update(PlanoAluno planoAluno) { return planoAlunoService.update(planoAluno); }
 }
