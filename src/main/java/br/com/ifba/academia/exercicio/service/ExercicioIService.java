@@ -9,8 +9,6 @@ public interface ExercicioIService {
     
     List<Exercicio> findAll();
     
-    List<Exercicio> findByFichaTreinoId(Long fichaTreinoId);
-    
     void delete(Long id);
     
     Exercicio save(Exercicio exercicio);

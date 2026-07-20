@@ -10,5 +10,4 @@ public interface ExercicioRepository extends JpaRepository<Exercicio, Long> {
     
     List<Exercicio> findByAtivoTrue();
     
-    List<Exercicio> findByFichaTreinoIdAndAtivoTrue(Long fichaTreinoId);
 }
