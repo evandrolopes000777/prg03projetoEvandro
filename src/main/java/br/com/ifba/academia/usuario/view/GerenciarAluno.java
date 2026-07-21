@@ -159,7 +159,12 @@ public class GerenciarAluno extends javax.swing.JFrame {
             int resposta = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir este aluno?", "Confirmação", JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
                 try {
+                    Usuario usuarioDeletado = usuarioService.findById(id);
+                    Long idPessoa = usuarioDeletado.getPessoa().getId();
+                    
                     usuarioService.delete(id);
+                    pessoaService.delete(idPessoa);
+                    
                     JOptionPane.showMessageDialog(this, "Aluno excluído com sucesso!");
                     preencherTabela();
                 } catch (Exception e) {

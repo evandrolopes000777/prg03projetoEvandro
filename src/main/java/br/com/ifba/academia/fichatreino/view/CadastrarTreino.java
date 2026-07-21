@@ -399,20 +399,27 @@ public class CadastrarTreino extends javax.swing.JFrame {
     }
     
     private void carregarComboboxAlunos() {
-       cbxAlunos.removeAllItems();
+        cbxAlunos.removeAllItems();
         cbxAlunos.addItem("Selecione um Aluno");
         
-        alunosCadastrados = new ArrayList<>(); 
-        
+        alunosCadastrados = new ArrayList<>();
         List<Pessoa> todasPessoas = pessoaService.findAll();
         
+        if (todasPessoas == null) {
+            return;
+        }
+        
         for (Pessoa p : todasPessoas) {
+            if (p == null) {
+                continue;
+            }
             
-            boolean isFlagAdmin = (p.getIsAdministrador() != null && p.getIsAdministrador());
-            boolean isAdminPadrao = (p.getCpf() != null && p.getCpf().equals("00000000000"));
-            boolean isNomeAdmin = (p.getNome() != null && p.getNome().equalsIgnoreCase("Administrador Padrão"));
+            boolean isAdmin = p.getIsAdministrador() != null && p.getIsAdministrador();
+            boolean isAdminPadrao = p.getCpf() != null && p.getCpf().equals("00000000000");
+            boolean isNomeAdmin = p.getNome() != null && p.getNome().equalsIgnoreCase("Administrador Padrão");
+            boolean isAtivo = p.getAtivo() != null && p.getAtivo();
             
-            if (isFlagAdmin || isAdminPadrao || isNomeAdmin || !p.getAtivo()) {
+            if (isAdmin || isAdminPadrao || isNomeAdmin || !isAtivo) {
                 continue;
             }
             
