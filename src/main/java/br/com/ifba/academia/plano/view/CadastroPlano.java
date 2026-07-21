@@ -7,10 +7,14 @@ public class CadastroPlano extends javax.swing.JFrame {
     
    private PlanoIController planoService;
    private Plano planoEmEdicao = null;
+   private javax.swing.table.DefaultTableModel modeloTabela;
 
     public CadastroPlano(PlanoIController planoService) {
         this.planoService = planoService;
         initComponents();
+        this.setLocationRelativeTo(null);
+        inicializarTabela();
+        preencherTabela();
     }
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroPlano.class.getName());
@@ -43,6 +47,9 @@ public class CadastroPlano extends javax.swing.JFrame {
         txtDuracaoDias = new javax.swing.JTextField();
         lblInformacoesPessoais = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPlanos = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -134,6 +141,26 @@ public class CadastroPlano extends javax.swing.JFrame {
 
         jLabel2.setText(".");
 
+        tblPlanos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblPlanos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPlanosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblPlanos);
+
+        jLabel1.setText("Planos Atuais:");
+
         javax.swing.GroupLayout lblDuracaoDiasLayout = new javax.swing.GroupLayout(lblDuracaoDias);
         lblDuracaoDias.setLayout(lblDuracaoDiasLayout);
         lblDuracaoDiasLayout.setHorizontalGroup(
@@ -141,36 +168,41 @@ public class CadastroPlano extends javax.swing.JFrame {
             .addGroup(lblDuracaoDiasLayout.createSequentialGroup()
                 .addGroup(lblDuracaoDiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lblDuracaoDiasLayout.createSequentialGroup()
-                        .addGroup(lblDuracaoDiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(lblDuracaoDiasLayout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblDuracaoDiasLayout.createSequentialGroup()
-                                .addGap(512, 512, 512)
-                                .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
+                        .addGap(512, 512, 512)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(lblDuracaoDiasLayout.createSequentialGroup()
                         .addGap(231, 231, 231)
                         .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblDuracaoDiasLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(lblDuracaoDiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
         lblDuracaoDiasLayout.setVerticalGroup(
             lblDuracaoDiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lblDuracaoDiasLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, lblDuracaoDiasLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(lblTitulo)
-                .addGap(31, 31, 31)
-                .addGroup(lblDuracaoDiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, lblDuracaoDiasLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 152, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(lblDuracaoDiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lblDuracaoDiasLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                         .addGroup(lblDuracaoDiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(lblDuracaoDiasLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(37, 37, 37))
         );
 
@@ -178,7 +210,7 @@ public class CadastroPlano extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblDuracaoDias, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblDuracaoDias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,13 +261,36 @@ public class CadastroPlano extends javax.swing.JFrame {
             else this.planoService.update(plano);
             
             javax.swing.JOptionPane.showMessageDialog(this, "Plano salvo com sucesso!");
-            this.dispose();
+            
+            preencherTabela();
+            limparCampos();
             
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Erro ao salvar plano: " + e.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void tblPlanosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPlanosMouseClicked
+        int linha = tblPlanos.getSelectedRow();
+        int coluna = tblPlanos.columnAtPoint(evt.getPoint());
+
+        if (linha != -1 && coluna == 4) { 
+            Long id = (Long) modeloTabela.getValueAt(linha, 0);
+            
+            int resposta = javax.swing.JOptionPane.showConfirmDialog(this, "Deseja realmente excluir este plano?", "Confirmação", javax.swing.JOptionPane.YES_NO_OPTION);
+            
+            if (resposta == javax.swing.JOptionPane.YES_OPTION) {
+                try {
+                    planoService.delete(id);
+                    preencherTabela();
+                    javax.swing.JOptionPane.showMessageDialog(this, "Plano excluído com sucesso!");
+                } catch (Exception e) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Erro ao excluir: " + e.getMessage(), "Erro", javax.swing.JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }//GEN-LAST:event_tblPlanosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -264,14 +319,17 @@ public class CadastroPlano extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCpf;
     private javax.swing.JPanel lblDuracaoDias;
     private javax.swing.JLabel lblInformacoesPessoais;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JLabel lblValor;
+    private javax.swing.JTable tblPlanos;
     private javax.swing.JTextField txtDuracaoDias;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtValor;
@@ -285,4 +343,44 @@ public class CadastroPlano extends javax.swing.JFrame {
         btnSalvar.setText("Salvar Alterações");
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
+    
+    private void inicializarTabela() {
+        modeloTabela = new javax.swing.table.DefaultTableModel(
+            new Object[][] {},
+            new String[] {"ID", "Nome", "Duração (dias)", "Valor", "Excluir"}
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Impede que o usuário digite na tabela
+            }
+        };
+        tblPlanos.setModel(modeloTabela);
+    }
+
+    private void preencherTabela() {
+        modeloTabela.setRowCount(0);
+        try {
+            java.util.List<Plano> lista = planoService.findAll(); // Certifique-se que findAll() existe no seu PlanoIController
+            for (Plano p : lista) {
+                modeloTabela.addRow(new Object[]{
+                    p.getId(), 
+                    p.getNome(), 
+                    p.getDuracaoDias(),
+                    p.getValor(),
+                    "❌ Excluir"
+                });
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Erro ao carregar planos: " + e.getMessage());
+        }
+    }
+    
+    private void limparCampos() {
+        txtNome.setText("");
+        txtDuracaoDias.setText("");
+        txtValor.setText("");
+        this.planoEmEdicao = null;
+        btnSalvar.setText("SALVAR");
+    }
+    
 }
