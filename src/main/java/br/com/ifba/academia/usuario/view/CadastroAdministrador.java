@@ -248,8 +248,10 @@ public class CadastroAdministrador extends javax.swing.JFrame {
                 pessoa.setCpf(pseudoCpf);
                 pessoa.setTelefone("00000000000");
                 pessoa.setDataNascimento(java.time.LocalDate.now());
+                pessoa.setIsAdministrador(true);
                 pessoa = pessoaService.save(pessoa);
             } else {
+                pessoa.setIsAdministrador(true);
                 pessoa = pessoaService.update(pessoa);
             }
 

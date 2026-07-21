@@ -32,5 +32,8 @@ public class Pessoa extends PersistenceEntity {
 
     @Column(name = "ativo", nullable = false)
     private Boolean ativo = true;
+    
+    @Column(name = "is_administrador", nullable = false)
+    private Boolean isAdministrador = false;
 
 }
