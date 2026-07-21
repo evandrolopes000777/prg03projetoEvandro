@@ -101,18 +101,21 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jButton5.setBackground(new java.awt.Color(153, 0, 0));
         jButton5.setFont(new java.awt.Font("Inter Black", 0, 13)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("Gerenciar Planos");
         jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton5.addActionListener(this::jButton5ActionPerformed);
 
         jButton6.setBackground(new java.awt.Color(0, 102, 0));
         jButton6.setFont(new java.awt.Font("Inter Black", 0, 13)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Cadastrar Exercicio");
         jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton6.addActionListener(this::jButton6ActionPerformed);
 
         jButton7.setBackground(new java.awt.Color(0, 102, 0));
         jButton7.setFont(new java.awt.Font("Inter Black", 0, 13)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Gerenciar Exercicio");
         jButton7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton7.addActionListener(this::jButton7ActionPerformed);
@@ -130,7 +133,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -209,11 +211,11 @@ public class DashboardAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        new CadastroExercicio(exercicioService, fichaTreinoService).setVisible(true);
+        new CadastroExercicio(exercicioService).setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        new GerenciarExercicio(exercicioService, fichaTreinoService).setVisible(true);
+        new GerenciarExercicio(exercicioService).setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     /**

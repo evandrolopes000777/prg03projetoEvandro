@@ -5,6 +5,7 @@ import br.com.ifba.academia.planoaluno.entity.PlanoAluno;
 import br.com.ifba.academia.fichatreino.entity.FichaTreino;
 import br.com.ifba.academia.exercicio.entity.Exercicio;
 import br.com.ifba.academia.fichatreino.controller.FichaTreinoIController;
+import br.com.ifba.academia.fichatreino.entity.ItemFicha;
 import br.com.ifba.academia.planoaluno.controller.PlanoAlunoIController;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
@@ -213,16 +214,19 @@ public class DashboardAluno extends javax.swing.JFrame {
     }
 
     private void atualizarTabelaTreino() {
-        DefaultTableModel modelo = (DefaultTableModel) tblFichaTreino.getModel();
-        modelo.setRowCount(0); 
+    DefaultTableModel modelo = (DefaultTableModel) tblFichaTreino.getModel();
+    modelo.setRowCount(0); 
 
-        try {
-            FichaTreino ficha = fichaTreinoService.buscarFichaAtual(alunoLogado.getPessoa().getId());
-            
-            if (ficha != null && ficha.getExercicios() != null) {
-                for (Exercicio ex : ficha.getExercicios()) {
+    try {
+        FichaTreino ficha = fichaTreinoService.buscarFichaAtual(alunoLogado.getPessoa().getId());
+        
+        if (ficha != null && ficha.getItens() != null && !ficha.getItens().isEmpty()) {
+                for (ItemFicha item : ficha.getItens()) {
                     modelo.addRow(new Object[]{
-                        ex.getNome(), ex.getSeries(), ex.getRepeticoes(), ex.getCarga() + " kg"
+                        item.getExercicio().getNome(),
+                        item.getSeries(),
+                        item.getRepeticoes(),
+                        item.getCarga() + " kg"
                     });
                 }
             } else {
@@ -232,5 +236,4 @@ public class DashboardAluno extends javax.swing.JFrame {
             System.out.println("Erro ao buscar treinos: " + e.getMessage());
         }
     }
-    
 }
