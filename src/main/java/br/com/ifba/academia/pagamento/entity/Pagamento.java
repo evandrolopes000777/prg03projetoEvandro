@@ -2,6 +2,7 @@ package br.com.ifba.academia.pagamento.entity;
 
 import br.com.ifba.academia.infrastructure.entity.PersistenceEntity;
 import br.com.ifba.academia.pessoa.entity.Pessoa;
+import br.com.ifba.academia.plano.entity.Plano;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -25,6 +26,10 @@ public class Pagamento extends PersistenceEntity {
     @ManyToOne
     @JoinColumn(name = "aluno_id", nullable = false)
     private Pessoa aluno;
+    
+    @ManyToOne
+    @JoinColumn(name = "plano_id")
+    private Plano plano;
 
     @Column(name = "valor", nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;

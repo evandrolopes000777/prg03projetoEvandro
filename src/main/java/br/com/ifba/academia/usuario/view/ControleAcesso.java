@@ -1,5 +1,7 @@
 package br.com.ifba.academia.usuario.view;
 
+import br.com.ifba.academia.pagamento.controller.PagamentoIController;
+import br.com.ifba.academia.pagamento.entity.Pagamento;
 import br.com.ifba.academia.pessoa.controller.PessoaIController;
 import br.com.ifba.academia.planoaluno.controller.PlanoAlunoIController;
 import br.com.ifba.academia.planoaluno.entity.PlanoAluno;
@@ -18,12 +20,14 @@ public class ControleAcesso extends javax.swing.JFrame {
 
     private PessoaIController pessoaService;
     private PlanoAlunoIController planoAlunoService;
+    private PagamentoIController pagamentoService;
     private DefaultTableModel modeloTabela;
     private TableRowSorter<DefaultTableModel> sorter;
 
-    public ControleAcesso(PessoaIController pessoaService, PlanoAlunoIController planoAlunoService) {
+    public ControleAcesso(PessoaIController pessoaService, PlanoAlunoIController planoAlunoService, PagamentoIController pagamentoService) {
         this.pessoaService = pessoaService;
         this.planoAlunoService = planoAlunoService;
+        this.pagamentoService = pagamentoService;
         initComponents();
         this.setLocationRelativeTo(null);
         
@@ -203,16 +207,36 @@ public class ControleAcesso extends javax.swing.JFrame {
                 }
             }
 
-            if (possuiMatriculaValida) {
-                lblStatus.setText("LIBERADO");
-                lblStatus.setForeground(new Color(0, 153, 0));
-            } else {
+            if (!possuiMatriculaValida) {
                 lblStatus.setText("BLOQUEADO (SEM MATRÍCULA)");
                 lblStatus.setForeground(Color.RED); 
+                return; 
+            }
+            
+            boolean pagamentoEmDia = false;
+            List<Pagamento> todosPagamentos = pagamentoService.findAll();
+            
+            java.time.LocalDate trintaDiasAtras = java.time.LocalDate.now().minusDays(30);
+            
+            for (Pagamento pag : todosPagamentos) {
+                if (pag.getAluno().getId().equals(idAluno) && pag.getAtivo()) {
+                    if (!pag.getDataPagamento().isBefore(trintaDiasAtras)) {
+                        pagamentoEmDia = true;
+                        break;
+                    }
+                }
+            }
+
+            if (pagamentoEmDia) {
+                lblStatus.setText("LIBERADO");
+                lblStatus.setForeground(new java.awt.Color(0, 153, 0));
+            } else {
+                lblStatus.setText("BLOQUEADO (INADIMPLENTE)");
+                lblStatus.setForeground(Color.RED);
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao verificar plano do aluno: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao verificar acesso: " + e.getMessage());
             lblStatus.setText("ERRO DE CONEXÃO");
             lblStatus.setForeground(Color.ORANGE);
         }
