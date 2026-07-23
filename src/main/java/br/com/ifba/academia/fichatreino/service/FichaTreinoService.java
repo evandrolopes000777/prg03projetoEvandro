@@ -1,6 +1,7 @@
 package br.com.ifba.academia.fichatreino.service;
 
 import br.com.ifba.academia.fichatreino.entity.FichaTreino;
+import br.com.ifba.academia.fichatreino.entity.ItemFicha;
 import br.com.ifba.academia.fichatreino.repository.FichaTreinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class FichaTreinoService implements FichaTreinoIService {
             throw new IllegalArgumentException("Nenhum dado informado para a atualizacao da ficha");
         }
         if (ficha.getId() == null) {
-            throw new IllegalArgumentException("O ID da ficha e obrigatori");
+            throw new IllegalArgumentException("O ID da ficha e obrigatorio");
         }
         
         FichaTreino fichaDb = fichaTreinoRepository.findById(ficha.getId())
@@ -55,6 +56,15 @@ public class FichaTreinoService implements FichaTreinoIService {
         }
 
         fichaDb.setDescricao(ficha.getDescricao());
+
+        fichaDb.getItens().clear(); 
+        
+        if (ficha.getItens() != null) {
+            for (ItemFicha novoItem : ficha.getItens()) {
+                fichaDb.adicionarItem(novoItem);
+            }
+        }
+
         return fichaTreinoRepository.save(fichaDb);
     }
 
